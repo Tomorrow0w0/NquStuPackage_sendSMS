@@ -37,14 +37,14 @@ db.collection("Mailroom")
 function IfInAuthList(ph_val,pg_val){
    admin.auth().getUserByPhoneNumber(ph_val)
          .then(function(userRecord) {
-             IfUpdatePackage(userRecord.phoneNumber,pg_val)
+             GetPackageInfo(userRecord.phoneNumber,pg_val)
           })
           .catch(function(error) {
                 //console.log("Error fetching user data:", error);
            }); 
 }
 
-function IfUpdatePackage(ph_val,pg_val){
+function GetPackageInfo(ph_val,pg_val){
     db.collection("students").doc(ph_val).collection("package")
        .where("pg_No", "==", pg_val)
       .get().then(querySnapshot => {
